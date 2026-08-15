@@ -20,5 +20,6 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
     @Override
     public void executeMission() {
         droneActivity.takeoff();
+        droneActivity.navigateToPickup();
     }
 }
