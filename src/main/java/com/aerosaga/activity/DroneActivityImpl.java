@@ -11,4 +11,9 @@ public class DroneActivityImpl implements DroneActivity {
     public void navigateToPickup() {
         System.out.println("Drone navigating to pickup location");
     }
+
+    @Override
+    public void returnToBase() {
+        System.out.println("Drone returning to base");
+    }
 }
