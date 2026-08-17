@@ -171,3 +171,65 @@
     grid-template-columns: 1fr;
   }
 }
+
+.drone-card {
+  background: #111827;
+  border: 1px solid #263244;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.drone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.drone-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.drone-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.drone-status.online {
+  background: #064e3b;
+  color: #6ee7b7;
+}
+
+.drone-status.flying {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+.drone-status.offline {
+  background: #4c1d1d;
+  color: #fca5a5;
+}
+
+.drone-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.drone-details div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.drone-details span {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.drone-details strong {
+  font-size: 16px;
+}

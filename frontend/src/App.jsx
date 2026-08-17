@@ -1,73 +1,110 @@
+import DroneCard from './components/DroneCard'
 import './App.css'
 
 function App() {
-  return (
-      <div className="app">
-        <header className="header">
-          <div className="brand">
-            <span className="brand-icon">🚁</span>
-            <div>
-              <h1>AeroSaga</h1>
-              <p>Drone Mission Control</p>
-            </div>
-          </div>
 
-          <div className="system-status">
-            <span className="status-dot"></span>
-            System Online
-          </div>
-        </header>
+    const drones = [
+        {
+            name: 'AS-001',
+            status: 'Online',
+            battery: 92,
+            location: 'Bengaluru',
+        },
+        {
+            name: 'AS-002',
+            status: 'Flying',
+            battery: 67,
+            location: 'Mysuru',
+        },
+        {
+            name: 'AS-003',
+            status: 'Offline',
+            battery: 15,
+            location: 'Tumakuru',
+        },
+    ]
 
-        <main className="dashboard">
-          <section className="welcome">
-            <h2>Mission Control Dashboard</h2>
-            <p>Monitor and manage autonomous drone missions.</p>
-          </section>
+    return (
+        <div className="app">
+            <header className="header">
+                <div className="brand">
+                    <span className="brand-icon">🚁</span>
+                    <div>
+                        <h1>AeroSaga</h1>
+                        <p>Drone Mission Control</p>
+                    </div>
+                </div>
 
-          <section className="stats">
-            <div className="stat-card">
-              <span>Total Drones</span>
-              <strong>0</strong>
-            </div>
+                <div className="system-status">
+                    <span className="status-dot"></span>
+                    System Online
+                </div>
+            </header>
 
-            <div className="stat-card">
-              <span>Active Missions</span>
-              <strong>0</strong>
-            </div>
+            <main className="dashboard">
+                <section className="welcome">
+                    <h2>Mission Control Dashboard</h2>
+                    <p>Monitor and manage autonomous drone missions.</p>
+                </section>
 
-            <div className="stat-card">
-              <span>Online Drones</span>
-              <strong>0</strong>
-            </div>
-          </section>
+                <section className="stats">
+                    <div className="stat-card">
+                        <span>Total Drones</span>
+                        <strong>0</strong>
+                    </div>
 
-          <section className="map-section">
-            <div className="section-header">
-              <h3>Mission Map</h3>
-              <span>Live View</span>
-            </div>
+                    <div className="stat-card">
+                        <span>Active Missions</span>
+                        <strong>0</strong>
+                    </div>
 
-            <div className="map-placeholder">
-              <div className="map-icon">📍</div>
-              <h3>Map View</h3>
-              <p>Drone mission map will appear here.</p>
-            </div>
-          </section>
+                    <div className="stat-card">
+                        <span>Online Drones</span>
+                        <strong>0</strong>
+                    </div>
+                </section>
 
-          <section className="missions">
-            <div className="section-header">
-              <h3>Active Missions</h3>
-              <span>0 Missions</span>
-            </div>
+                <section className="map-section">
+                    <div className="section-header">
+                        <h3>Mission Map</h3>
+                        <span>Live View</span>
+                    </div>
 
-            <div className="empty-state">
-              <p>No active missions</p>
-              <small>Mission data will appear here when available.</small>
-            </div>
-          </section>
-        </main>
-      </div>
-  )
+                    <div className="map-placeholder">
+                        <div className="map-icon">📍</div>
+                        <h3>Map View</h3>
+                        <p>Drone mission map will appear here.</p>
+                    </div>
+                </section>
+
+                {/* Drone Fleet */}
+                <section className="drone-fleet">
+                    <div className="section-header">
+                        <h2>Drone Fleet</h2>
+                        <span>{drones.length} Drones</span>
+                    </div>
+
+                    <div className="drone-grid">
+                        {drones.map((drone) => (
+                            <DroneCard key={drone.name} drone={drone} />
+                        ))}
+                    </div>
+                </section>
+
+                <section className="missions">
+                    <div className="section-header">
+                        <h3>Active Missions</h3>
+                        <span>0 Missions</span>
+                    </div>
+
+                    <div className="empty-state">
+                        <p>No active missions</p>
+                        <small>Mission data will appear here when available.</small>
+                    </div>
+                </section>
+            </main>
+        </div>
+    )
 }
 
 export default App
