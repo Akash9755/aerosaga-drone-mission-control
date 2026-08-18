@@ -1,4 +1,5 @@
 import DroneCard from './components/DroneCard'
+import MissionMap from './MissionMap'
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             location: 'Tumakuru',
         },
     ]
+    const missions = []
 
     return (
         <div className="app">
@@ -50,7 +52,7 @@ function App() {
                 <section className="stats">
                     <div className="stat-card">
                         <span>Total Drones</span>
-                        <strong>0</strong>
+                        <strong>{drones.length}</strong>
                     </div>
 
                     <div className="stat-card">
@@ -60,7 +62,9 @@ function App() {
 
                     <div className="stat-card">
                         <span>Online Drones</span>
-                        <strong>0</strong>
+                        <strong>
+                            {drones.filter((drone) => drone.status === 'Online').length}
+                        </strong>
                     </div>
                 </section>
 
@@ -70,11 +74,7 @@ function App() {
                         <span>Live View</span>
                     </div>
 
-                    <div className="map-placeholder">
-                        <div className="map-icon">📍</div>
-                        <h3>Map View</h3>
-                        <p>Drone mission map will appear here.</p>
-                    </div>
+                    <MissionMap />
                 </section>
 
                 {/* Drone Fleet */}
@@ -94,7 +94,7 @@ function App() {
                 <section className="missions">
                     <div className="section-header">
                         <h3>Active Missions</h3>
-                        <span>0 Missions</span>
+                        <span>{missions.length} Missions</span>
                     </div>
 
                     <div className="empty-state">
