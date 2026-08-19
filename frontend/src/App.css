@@ -233,3 +233,104 @@
 .drone-details strong {
   font-size: 16px;
 }
+.alerts {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid #1f2937;
+}
+
+.alert-item:last-child {
+  border-bottom: none;
+}
+
+.alert-item h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.alert-item p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.alert-item > span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.mission-card {
+  padding: 22px;
+}
+
+.mission-info h4 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+
+.mission-info p {
+  margin: 0 0 18px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.mission-status {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.mission-status > div {
+  padding: 14px;
+  border: 1px solid #263244;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mission-status span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.mission-status strong {
+  font-size: 13px;
+}
+
+.completed {
+  color: #34d399;
+}
+
+.active {
+  color: #60a5fa;
+}
+
+.pending {
+  color: #fbbf24;
+}
+
+@media (max-width: 768px) {
+  .mission-status {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .alert-item {
+    gap: 10px;
+  }
+}
