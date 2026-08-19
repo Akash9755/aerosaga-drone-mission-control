@@ -137,7 +137,7 @@ function App() {
 
             <div className="mission-card">
               <div className="mission-info">
-                <h4>Mission #001</h4>
+                <h4>Mission rgb(207, 207, 213)</h4>
                 <p>Drone: AS-001</p>
               </div>
 
