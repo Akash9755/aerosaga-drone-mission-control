@@ -37,10 +37,24 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
                             .build()
             );
 
+    private boolean abortRequested = false;
+    private boolean returnHomeRequested = false;
+
     @Override
     public void executeMission() {
         droneActivity.takeoff();
+
+        if (abortRequested || returnHomeRequested) {
+            droneActivity.returnToBase();
+            return;
+        }
+
         droneActivity.navigateToPickup();
+
+        if (abortRequested || returnHomeRequested) {
+            droneActivity.returnToBase();
+            return;
+        }
 
         try {
             deliveryActivity.dropPackage();
@@ -50,5 +64,15 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
         }
 
         droneActivity.returnToBase();
+    }
+
+    @Override
+    public void abortMission() {
+        abortRequested = true;
+    }
+
+    @Override
+    public void returnHome() {
+        returnHomeRequested = true;
     }
 }
