@@ -40,7 +40,7 @@ function App() {
           <span className="brand-icon">🚁</span>
           <div>
             <h1>AeroSaga</h1>
-            <p>Drone Mission Control</p>
+            <p>DRONE MISSION CONTROL</p>
           </div>
         </div>
 
