@@ -1,3 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0b1120;
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
+}
+
 .app {
   min-height: 100vh;
   background: #0b1120;
@@ -5,7 +16,7 @@
   display: flex;
 }
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
 
 .sidebar {
   width: 240px;
@@ -15,7 +26,6 @@
   position: fixed;
   left: 0;
   top: 0;
-  box-sizing: border-box;
   z-index: 100;
 }
 
@@ -44,6 +54,7 @@
 
 .sidebar-nav {
   margin-top: 20px;
+  padding: 0 8px;
 }
 
 .nav-item {
@@ -83,16 +94,15 @@
   font-size: 11px;
 }
 
-/* MAIN CONTENT */
+/* ================= MAIN ================= */
 
 .main-content {
   margin-left: 240px;
   min-height: 100vh;
   width: calc(100% - 240px);
-  box-sizing: border-box;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 .header {
   display: flex;
@@ -139,12 +149,11 @@
   background: #22c55e;
 }
 
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
 
 .dashboard {
   width: 100%;
   padding: 32px;
-  box-sizing: border-box;
 }
 
 .welcome {
@@ -161,7 +170,7 @@
   color: #94a3b8;
 }
 
-/* STATS */
+/* ================= STATS ================= */
 
 .stats {
   display: grid;
@@ -188,22 +197,21 @@
   font-size: 32px;
 }
 
-/* MAIN GRID */
+/* =================================================
+   TOP ROW
+   MAP                 | ALERTS
+                       | MISSION PROGRESS
+   ================================================= */
 
-.dashboard-grid {
+.dashboard-top {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
   gap: 24px;
   align-items: start;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
-.dashboard-left,
-.dashboard-right {
-  min-width: 0;
-}
-
-/* SECTION HEADER */
+/* ================= SECTION HEADER ================= */
 
 .section-header {
   display: flex;
@@ -224,17 +232,22 @@
   font-size: 14px;
 }
 
-/* MAP */
+/* ================= MAP ================= */
 
 .map-section {
   background: #111827;
   border: 1px solid #1f2937;
   border-radius: 12px;
-  margin-bottom: 24px;
   overflow: hidden;
 }
 
-/* ALERTS */
+/* ================= RIGHT SIDE ================= */
+
+.dashboard-right {
+  min-width: 0;
+}
+
+/* ================= ALERTS ================= */
 
 .alerts {
   background: #111827;
@@ -279,7 +292,76 @@
   white-space: nowrap;
 }
 
-/* MISSION */
+/* ================= MISSION PROGRESS ================= */
+
+.mission-progress {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 22px;
+}
+
+.progress-item {
+  width: 100%;
+}
+
+.progress-info {
+  display: grid;
+  grid-template-columns: 1fr auto 60px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.progress-info span {
+  font-size: 13px;
+}
+
+.progress-info strong {
+  font-size: 13px;
+}
+
+.progress-info small {
+  color: #8b9bb4;
+  font-size: 12px;
+  text-align: right;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #1d293b;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+/* =================================================
+   BOTTOM ROW
+   ACTIVE MISSIONS       | QUICK ACTIONS
+   ================================================= */
+
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 28px;
+}
+
+/* ================= ACTIVE MISSIONS ================= */
 
 .missions {
   background: #111827;
@@ -339,69 +421,55 @@
   color: #fbbf24;
 }
 
-/* MISSION PROGRESS */
+/* ================= QUICK ACTIONS ================= */
 
-.mission-progress {
+.quick-actions {
   background: #111827;
   border: 1px solid #1f2937;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.progress-list {
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 20px;
+}
+
+.action-card {
+  min-height: 90px;
+  border: 1px solid #243047;
+  border-radius: 10px;
+  background: #111827;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 20px 22px;
-}
-
-.progress-item {
-  width: 100%;
-}
-
-.progress-info {
-  display: grid;
-  grid-template-columns: 1fr auto 60px;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin-bottom: 6px;
+  cursor: pointer;
 }
 
-.progress-info span {
+.action-card span {
+  font-size: 24px;
+}
+
+.action-card strong {
   font-size: 13px;
+  text-align: center;
 }
 
-.progress-info strong {
-  font-size: 13px;
+.action-card:hover {
+  border-color: #3b82f6;
 }
 
-.progress-info small {
-  font-size: 12px;
-  color: #8b9bb4;
-  text-align: right;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: #1d293b;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: #3b82f6;
-  border-radius: 10px;
-}
-
-/* DRONE FLEET */
+/* ================= DRONE FLEET ================= */
 
 .drone-fleet {
   background: #111827;
   border: 1px solid #1f2937;
   border-radius: 12px;
-  margin-bottom: 28px;
   overflow: hidden;
 }
 
@@ -473,57 +541,17 @@
   font-size: 16px;
 }
 
-/* QUICK ACTIONS */
-
-.quick-actions {
-  background: #111827;
-  border: 1px solid #1f2937;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.quick-actions-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding: 20px;
-}
-
-.action-card {
-  min-height: 90px;
-  border: 1px solid #243047;
-  border-radius: 10px;
-  background: #111827;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.action-card span {
-  font-size: 24px;
-}
-
-.action-card strong {
-  font-size: 14px;
-}
-
-.action-card:hover {
-  border-color: #3b82f6;
-}
-
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 
 @media (max-width: 1100px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
 
   .stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-top,
+  .dashboard-bottom {
+    grid-template-columns: 1fr;
   }
 
   .drone-grid {
@@ -532,6 +560,7 @@
 }
 
 @media (max-width: 768px) {
+
   .sidebar {
     width: 200px;
   }
@@ -563,9 +592,5 @@
 
   .quick-actions-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .alert-item {
-    gap: 10px;
   }
 }

@@ -26,10 +26,11 @@ function App() {
 
   return (
     <div className="app">
-      {/* Sidebar */}
+      {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">
           <span className="brand-icon">🚁</span>
+
           <div>
             <h1>AeroSaga</h1>
             <p>Drone Mission Control</p>
@@ -53,11 +54,13 @@ function App() {
         </div>
       </aside>
 
+      {/* MAIN CONTENT */}
       <div className="main-content">
-        {/* Header */}
+        {/* HEADER */}
         <header className="header">
           <div className="brand">
             <span className="brand-icon">🚁</span>
+
             <div>
               <h1>AeroSaga</h1>
               <p>Drone Mission Control</p>
@@ -71,12 +74,13 @@ function App() {
         </header>
 
         <main className="dashboard">
+          {/* WELCOME */}
           <section className="welcome">
             <h2>Mission Control Dashboard</h2>
             <p>Monitor and manage autonomous drone missions.</p>
           </section>
 
-          {/* Stats */}
+          {/* STATS */}
           <section className="stats">
             <div className="stat-card">
               <span>Total Drones</span>
@@ -101,61 +105,24 @@ function App() {
             </div>
           </section>
 
-          {/* Main Dashboard Grid */}
-          <section className="dashboard-grid">
-            {/* Left Column */}
-            <div className="dashboard-left">
-              {/* Mission Map */}
-              <section className="map-section">
-                <div className="section-header">
-                  <h3>Mission Map</h3>
-                  <span>Live View</span>
-                </div>
+          {/* TOP ROW
+              LEFT  = MAP
+              RIGHT = ALERTS + PROGRESS
+          */}
+          <section className="dashboard-top">
+            {/* MAP */}
+            <section className="map-section">
+              <div className="section-header">
+                <h3>Mission Map</h3>
+                <span>Live View</span>
+              </div>
 
-                <MissionMap />
-              </section>
+              <MissionMap />
+            </section>
 
-              {/* Active Missions */}
-              <section className="missions">
-                <div className="section-header">
-                  <h3>Active Missions</h3>
-                  <span>1 Mission</span>
-                </div>
-
-                <div className="mission-card">
-                  <div className="mission-info">
-                    <h4>Mission #001</h4>
-                    <p>Drone: AS-001</p>
-                  </div>
-
-                  <div className="mission-status">
-                    <div>
-                      <span>Takeoff</span>
-                      <strong className="completed">Completed</strong>
-                    </div>
-
-                    <div>
-                      <span>Navigate</span>
-                      <strong className="active">Active</strong>
-                    </div>
-
-                    <div>
-                      <span>Drop Package</span>
-                      <strong className="pending">Pending</strong>
-                    </div>
-
-                    <div>
-                      <span>Return</span>
-                      <strong className="pending">Pending</strong>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-
-            {/* Right Column */}
+            {/* RIGHT SIDE */}
             <div className="dashboard-right">
-              {/* Recent Alerts */}
+              {/* RECENT ALERTS */}
               <section className="alerts">
                 <div className="section-header">
                   <h3>Recent Alerts</h3>
@@ -168,6 +135,7 @@ function App() {
                       <h4>Low Battery - AS-003</h4>
                       <p>15% battery remaining</p>
                     </div>
+
                     <span>2 min ago</span>
                   </div>
 
@@ -176,6 +144,7 @@ function App() {
                       <h4>Signal Loss - AS-002</h4>
                       <p>No signal for 30s</p>
                     </div>
+
                     <span>15 min ago</span>
                   </div>
 
@@ -184,12 +153,13 @@ function App() {
                       <h4>Drone Offline - AS-003</h4>
                       <p>Drone is currently offline</p>
                     </div>
+
                     <span>1 hr ago</span>
                   </div>
                 </div>
               </section>
 
-              {/* Mission Progress */}
+              {/* MISSION PROGRESS */}
               <section className="mission-progress">
                 <div className="section-header">
                   <h3>Mission Progress</h3>
@@ -258,38 +228,82 @@ function App() {
                   </div>
                 </div>
               </section>
-              {/* Quick Actions */}
-              <section className="quick-actions">
-                <div className="section-header">
-                  <h3>Quick Actions</h3>
-                </div>
-
-                <div className="quick-actions-grid">
-                  <button className="action-card">
-                    <span>＋</span>
-                    <strong>New Mission</strong>
-                  </button>
-
-                  <button className="action-card">
-                    <span>⇧</span>
-                    <strong>Upload Waypoints</strong>
-                  </button>
-
-                  <button className="action-card">
-                    <span>🚁</span>
-                    <strong>Add Drone</strong>
-                  </button>
-
-                  <button className="action-card">
-                    <span>🗺️</span>
-                    <strong>View All Missions</strong>
-                  </button>
-                </div>
-              </section>
             </div>
           </section>
 
-          {/* Drone Fleet */}
+          {/* BOTTOM ROW
+              LEFT  = ACTIVE MISSIONS
+              RIGHT = QUICK ACTIONS
+          */}
+          <section className="dashboard-bottom">
+            {/* ACTIVE MISSIONS */}
+            <section className="missions">
+              <div className="section-header">
+                <h3>Active Missions</h3>
+                <span>1 Mission</span>
+              </div>
+
+              <div className="mission-card">
+                <div className="mission-info">
+                  <h4>Mission #001</h4>
+                  <p>Drone: AS-001</p>
+                </div>
+
+                <div className="mission-status">
+                  <div>
+                    <span>Takeoff</span>
+                    <strong className="completed">Completed</strong>
+                  </div>
+
+                  <div>
+                    <span>Navigate</span>
+                    <strong className="active">Active</strong>
+                  </div>
+
+                  <div>
+                    <span>Drop Package</span>
+                    <strong className="pending">Pending</strong>
+                  </div>
+
+                  <div>
+                    <span>Return</span>
+                    <strong className="pending">Pending</strong>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* QUICK ACTIONS */}
+            <section className="quick-actions">
+              <div className="section-header">
+                <h3>Quick Actions</h3>
+              </div>
+
+              <div className="quick-actions-grid">
+                <button className="action-card">
+                  <span>＋</span>
+                  <strong>New Mission</strong>
+                </button>
+
+                <button className="action-card">
+                  <span>⇧</span>
+                  <strong>Upload Waypoints</strong>
+                </button>
+
+                <button className="action-card">
+                  <span>🚁</span>
+                  <strong>Add Drone</strong>
+                </button>
+
+                <button className="action-card">
+                  <span>🗺️</span>
+                  <strong>View All Missions</strong>
+                </button>
+              </div>
+            </section>
+          </section>
+
+          {/* DRONE FLEET */}
           <section className="drone-fleet">
             <div className="section-header">
               <h2>Drone Fleet</h2>
