@@ -40,30 +40,45 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
     private boolean abortRequested = false;
     private boolean returnHomeRequested = false;
 
+    private String missionState = "IDLE";
+
     @Override
     public void executeMission() {
+
+        missionState = "TAKEOFF";
         droneActivity.takeoff();
 
         if (abortRequested || returnHomeRequested) {
+            missionState = "RETURNING_HOME";
             droneActivity.returnToBase();
+            missionState = "COMPLETED";
             return;
         }
 
+        missionState = "NAVIGATING_TO_PICKUP";
         droneActivity.navigateToPickup();
 
         if (abortRequested || returnHomeRequested) {
+            missionState = "RETURNING_HOME";
             droneActivity.returnToBase();
+            missionState = "COMPLETED";
             return;
         }
 
         try {
+            missionState = "DROPPING_PACKAGE";
             deliveryActivity.dropPackage();
         } catch (Exception e) {
+            missionState = "RETURNING_HOME";
             droneActivity.returnToBase();
+            missionState = "FAILED";
             throw e;
         }
 
+        missionState = "RETURNING_HOME";
         droneActivity.returnToBase();
+
+        missionState = "COMPLETED";
     }
 
     @Override
@@ -74,5 +89,10 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
     @Override
     public void returnHome() {
         returnHomeRequested = true;
+    }
+
+    @Override
+    public String getMissionState() {
+        return missionState;
     }
 }

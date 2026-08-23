@@ -1,8 +1,9 @@
 package com.aerosaga.workflow;
 
+import io.temporal.workflow.QueryMethod;
+import io.temporal.workflow.SignalMethod;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
-import io.temporal.workflow.SignalMethod;
 
 @WorkflowInterface
 public interface DroneMissionWorkflow {
@@ -15,4 +16,7 @@ public interface DroneMissionWorkflow {
 
     @SignalMethod
     void returnHome();
+
+    @QueryMethod
+    String getMissionState();
 }
