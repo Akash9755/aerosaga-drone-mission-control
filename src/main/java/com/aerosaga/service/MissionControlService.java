@@ -42,4 +42,8 @@ public class MissionControlService {
     public void returnHome() {
         workflow.returnHome();
     }
+
+    public String getMissionState() {
+        return workflow.getMissionState();
+    }
 }

@@ -2,6 +2,7 @@ package com.aerosaga.controller;
 
 import com.aerosaga.service.MissionControlService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,5 +27,10 @@ public class MissionController {
     public ResponseEntity<String> returnHome() {
         missionControlService.returnHome();
         return ResponseEntity.ok("Return home requested");
+    }
+
+    @GetMapping("/state")
+    public ResponseEntity<String> getMissionState() {
+        return ResponseEntity.ok(missionControlService.getMissionState());
     }
 }
