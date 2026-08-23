@@ -1,5 +1,7 @@
 package com.aerosaga.worker;
 
+import com.aerosaga.activity.DeliveryActivityImpl;
+import com.aerosaga.activity.DroneActivityImpl;
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
@@ -25,7 +27,14 @@ public class DroneMissionWorker {
 
         Worker worker = factory.newWorker(TASK_QUEUE);
 
-        worker.registerWorkflowImplementationTypes(DroneMissionWorkflowImpl.class);
+        worker.registerWorkflowImplementationTypes(
+                DroneMissionWorkflowImpl.class
+        );
+
+        worker.registerActivitiesImplementations(
+                new DroneActivityImpl(),
+                new DeliveryActivityImpl()
+        );
 
         factory.start();
     }
