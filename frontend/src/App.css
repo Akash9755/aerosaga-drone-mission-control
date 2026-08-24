@@ -148,6 +148,122 @@ body {
   border-radius: 50%;
   background: #22c55e;
 }
+/* ================= HEADER ACTIONS ================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* SEARCH */
+
+.search-box {
+  width: 305px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: #0b1424;
+  border: 1px solid #263244;
+  border-radius: 10px;
+}
+
+.search-box span {
+  font-size: 16px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #7f8da3;
+}
+
+/* NOTIFICATION */
+
+.notification {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0b1424;
+  border: 1px solid #263244;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.notification span {
+  font-size: 20px;
+}
+
+.notification b {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+}
+
+/* OPERATOR */
+
+.operator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+  cursor: pointer;
+}
+
+.operator-avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #263244;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.operator-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.operator-info strong {
+  color: #f1f5f9;
+  font-size: 14px;
+}
+
+.operator-info small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.operator-arrow {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 18px;
+}
 
 /* ================= DASHBOARD ================= */
 
@@ -544,7 +660,6 @@ body {
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 1100px) {
-
   .stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -560,7 +675,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   .sidebar {
     width: 200px;
   }

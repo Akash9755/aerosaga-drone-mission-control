@@ -58,28 +58,37 @@ function App() {
       <div className="main-content">
         {/* HEADER */}
         <header className="header">
-          <div className="brand">
-            <span className="brand-icon">🚁</span>
-
-            <div>
-              <h1>AeroSaga</h1>
-              <p>Drone Mission Control</p>
-            </div>
+          <div className="header-title">
+            <h1>Mission Control Dashboard</h1>
+            <p>Monitor and manage autonomous drone missions.</p>
           </div>
 
-          <div className="system-status">
-            <span className="status-dot"></span>
-            System Online
+          <div className="header-actions">
+            <div className="search-box">
+              <span>🔍</span>
+              <input type="text" placeholder="Search missions, drones..." />
+            </div>
+
+            <div className="notification">
+              <span>🔔</span>
+              <b>3</b>
+            </div>
+
+            <div className="operator">
+              <div className="operator-avatar">👤</div>
+
+              <div className="operator-info">
+                <strong>Operator</strong>
+                <small>Admin</small>
+              </div>
+
+              <span className="operator-arrow">⌄</span>
+            </div>
           </div>
         </header>
 
+        {/* DASHBOARD */}
         <main className="dashboard">
-          {/* WELCOME */}
-          <section className="welcome">
-            <h2>Mission Control Dashboard</h2>
-            <p>Monitor and manage autonomous drone missions.</p>
-          </section>
-
           {/* STATS */}
           <section className="stats">
             <div className="stat-card">
@@ -105,24 +114,23 @@ function App() {
             </div>
           </section>
 
-          {/* TOP ROW
-              LEFT  = MAP
-              RIGHT = ALERTS + PROGRESS
-          */}
+          {/* TOP ROW */}
           <section className="dashboard-top">
             {/* MAP */}
-            <section className="map-section">
-              <div className="section-header">
-                <h3>Mission Map</h3>
-                <span>Live View</span>
-              </div>
+            <div className="dashboard-left">
+              <section className="map-section">
+                <div className="section-header">
+                  <h3>Mission Map</h3>
+                  <span>Live View</span>
+                </div>
 
-              <MissionMap />
-            </section>
+                <MissionMap />
+              </section>
+            </div>
 
             {/* RIGHT SIDE */}
             <div className="dashboard-right">
-              {/* RECENT ALERTS */}
+              {/* ALERTS */}
               <section className="alerts">
                 <div className="section-header">
                   <h3>Recent Alerts</h3>
@@ -231,10 +239,7 @@ function App() {
             </div>
           </section>
 
-          {/* BOTTOM ROW
-              LEFT  = ACTIVE MISSIONS
-              RIGHT = QUICK ACTIONS
-          */}
+          {/* BOTTOM ROW */}
           <section className="dashboard-bottom">
             {/* ACTIVE MISSIONS */}
             <section className="missions">
