@@ -91,26 +91,58 @@ function App() {
         <main className="dashboard">
           {/* STATS */}
           <section className="stats">
-            <div className="stat-card">
-              <span>Total Drones</span>
-              <strong>{drones.length}</strong>
+            <div className="stat-card blue">
+              <div className="stat-top">
+                <div className="stat-icon">🚁</div>
+
+                <div>
+                  <span>Total Drones</span>
+                  <strong>{drones.length}</strong>
+                </div>
+              </div>
+
+              <p className="stat-change green">↗ +2 this week</p>
             </div>
 
-            <div className="stat-card">
-              <span>Active Missions</span>
-              <strong>1</strong>
+            <div className="stat-card purple">
+              <div className="stat-top">
+                <div className="stat-icon">◉</div>
+
+                <div>
+                  <span>Active Missions</span>
+                  <strong>1</strong>
+                </div>
+              </div>
+
+              <p className="stat-change green">↗ +3 running</p>
             </div>
 
-            <div className="stat-card">
-              <span>Online Drones</span>
-              <strong>
-                {drones.filter((drone) => drone.status === "Online").length}
-              </strong>
+            <div className="stat-card green">
+              <div className="stat-top">
+                <div className="stat-icon">🚁</div>
+
+                <div>
+                  <span>Online Drones</span>
+                  <strong>
+                    {drones.filter((drone) => drone.status === "Online").length}
+                  </strong>
+                </div>
+              </div>
+
+              <p className="stat-change green">↗ 75% of total</p>
             </div>
 
-            <div className="stat-card">
-              <span>Alerts</span>
-              <strong>3</strong>
+            <div className="stat-card red">
+              <div className="stat-top">
+                <div className="stat-icon">⚠</div>
+
+                <div>
+                  <span>Alerts</span>
+                  <strong>3</strong>
+                </div>
+              </div>
+
+              <p className="stat-change red-text">↗ Requires attention</p>
             </div>
           </section>
 
