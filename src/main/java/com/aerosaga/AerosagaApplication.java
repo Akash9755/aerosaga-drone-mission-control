@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AerosagaApplication {
 
 	public static void main(String[] args) {
+
+		System.setProperty("user.timezone", "UTC");
+
 		SpringApplication.run(AerosagaApplication.class, args);
 	}
 
