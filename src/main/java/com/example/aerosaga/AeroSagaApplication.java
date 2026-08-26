@@ -8,6 +8,5 @@ public class AeroSagaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AeroSagaApplication.class, args);
-        System.out.println("what Happens ");
     }
 }
