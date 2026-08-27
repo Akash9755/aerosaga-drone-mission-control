@@ -43,7 +43,7 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
     private String missionState = "IDLE";
 
     @Override
-    public void executeMission() {
+    public void executeMission(Long missionId) {
 
         missionState = "TAKEOFF";
         droneActivity.takeoff();

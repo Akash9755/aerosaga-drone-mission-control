@@ -9,7 +9,7 @@ import io.temporal.workflow.WorkflowMethod;
 public interface DroneMissionWorkflow {
 
     @WorkflowMethod
-    void executeMission();
+    void executeMission(Long missionId);
 
     @SignalMethod
     void abortMission();

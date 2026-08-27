@@ -26,11 +26,11 @@ public class DroneMissionStarter {
                         DroneMissionWorkflow.class,
                         WorkflowOptions.newBuilder()
                                 .setTaskQueue(TASK_QUEUE)
-                                .setWorkflowId("drone-mission-001")
+                                .setWorkflowId("drone-mission-test-001")
                                 .build()
                 );
 
-        workflow.executeMission();
+        workflow.executeMission(1L);
 
         System.out.println("Drone mission workflow completed.");
     }
