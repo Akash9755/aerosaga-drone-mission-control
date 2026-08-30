@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
     Viewer,
     Cartesian3,
@@ -11,6 +11,7 @@ import 'cesium/Build/Cesium/Widgets/widgets.css'
 
 function MissionMap() {
     const mapRef = useRef(null)
+    const [selectedDrone, setSelectedDrone] = useState(null)
 
     useEffect(() => {
         const viewer = new Viewer(mapRef.current, {
@@ -27,6 +28,11 @@ function MissionMap() {
         viewer.entities.add({
             name: 'AS-001',
             position: Cartesian3.fromDegrees(77.5946, 12.9716),
+            properties: {
+                status: 'Online',
+                battery: '92%',
+                location: 'Bengaluru',
+            },
             point: {
                 pixelSize: 14,
                 color: Color.GREEN,
@@ -46,6 +52,11 @@ function MissionMap() {
         viewer.entities.add({
             name: 'AS-002',
             position: Cartesian3.fromDegrees(76.6394, 12.2958),
+            properties: {
+                status: 'Flying',
+                battery: '67%',
+                location: 'Mysuru',
+            },
             point: {
                 pixelSize: 14,
                 color: Color.BLUE,
@@ -65,6 +76,11 @@ function MissionMap() {
         viewer.entities.add({
             name: 'AS-003',
             position: Cartesian3.fromDegrees(77.1010, 13.3392),
+            properties: {
+                status: 'Offline',
+                battery: '15%',
+                location: 'Tumakuru',
+            },
             point: {
                 pixelSize: 14,
                 color: Color.RED,
@@ -80,20 +96,27 @@ function MissionMap() {
             },
         })
 
-        const handler = new ScreenSpaceEventHandler(viewer.scene.canvas)
+        // Drone click handler
+        const clickHandler = new ScreenSpaceEventHandler(
+            viewer.scene.canvas
+        )
 
-        handler.setInputAction((click) => {
+        clickHandler.setInputAction((click) => {
             const pickedObject = viewer.scene.pick(click.position)
 
             if (pickedObject && pickedObject.id) {
                 const drone = pickedObject.id
 
-                alert(
-                    `${drone.name}\nStatus: ${drone.properties?.status || 'Available'}`
-                )
+                setSelectedDrone({
+                    name: drone.name,
+                    status: drone.properties.status.getValue(),
+                    battery: drone.properties.battery.getValue(),
+                    location: drone.properties.location.getValue(),
+                })
             }
         }, ScreenSpaceEventType.LEFT_CLICK)
 
+        // Move camera to Karnataka
         viewer.camera.flyTo({
             destination: Cartesian3.fromDegrees(
                 77.0,
@@ -103,18 +126,63 @@ function MissionMap() {
         })
 
         return () => {
+            clickHandler.destroy()
             viewer.destroy()
         }
     }, [])
 
     return (
-        <div
-            ref={mapRef}
-            style={{
-                width: '100%',
-                height: '480px',
-            }}
-        />
+        <div style={{ position: 'relative' }}>
+            <div
+                ref={mapRef}
+                style={{
+                    width: '100%',
+                    height: '480px',
+                }}
+            />
+
+            {selectedDrone && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '20px',
+                        right: '20px',
+                        background: '#111827',
+                        padding: '20px',
+                        borderRadius: '10px',
+                        color: 'white',
+                        minWidth: '200px',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
+                    }}
+                >
+                    <h3>{selectedDrone.name}</h3>
+
+                    <p>
+                        <strong>Status:</strong> {selectedDrone.status}
+                    </p>
+
+                    <p>
+                        <strong>Battery:</strong> {selectedDrone.battery}
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong> {selectedDrone.location}
+                    </p>
+
+                    <button
+                        onClick={() => setSelectedDrone(null)}
+                        style={{
+                            padding: '8px 15px',
+                            borderRadius: '6px',
+                            border: 'none',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        Close
+                    </button>
+                </div>
+            )}
+        </div>
     )
 }
 

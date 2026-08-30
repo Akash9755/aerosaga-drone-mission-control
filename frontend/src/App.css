@@ -336,6 +336,7 @@
     gap: 10px;
   }
 }
+<<<<<<< HEAD
 .mission-progress {
   margin-top: 24px;
   padding: 20px;
@@ -523,4 +524,157 @@
 .main-content .header {
   width: 100%;
   box-sizing: border-box;
+=======
+/* Mission Controls */
+
+.mission-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #1f2937;
+}
+
+.mission-controls button {
+    padding: 10px 16px;
+    border: 1px solid #263244;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #e5e7eb;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.mission-controls button:hover {
+    background: #334155;
+    border-color: #60a5fa;
+}
+
+.mission-controls button:active {
+    transform: scale(0.97);
+}
+
+.mission-info > strong {
+    display: inline-block;
+    margin-top: 8px;
+    color: #60a5fa;
+    font-size: 14px;
+}
+/* Battery Progress Bar */
+
+.battery-bar {
+    width: 100%;
+    height: 6px;
+    background: #263244;
+    border-radius: 10px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.battery-level {
+    height: 100%;
+    background: #22c55e;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+/* Drone Fleet Grid */
+
+.drone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 22px;
+}
+
+.drone-grid .drone-card {
+    margin-bottom: 0;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.drone-grid .drone-card:hover {
+    transform: translateY(-3px);
+    border-color: #60a5fa;
+}
+
+@media (max-width: 900px) {
+    .drone-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .drone-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.alert-toggle {
+    background: none;
+    border: none;
+    color: #60a5fa;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.alert-toggle:hover {
+    text-decoration: underline;
+}
+.mission-progress {
+    margin: 20px 0;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.progress-header span {
+    color: #94a3b8;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #263244;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-level {
+    width: 50%;
+    height: 100%;
+    background: #60a5fa;
+    border-radius: 10px;
+}
+
+.battery-bar {
+    width: 100%;
+    height: 6px;
+    margin-top: 8px;
+    background: #263244;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.battery-level {
+    height: 100%;
+    background: #22c55e;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+.battery-good {
+    background: #22c55e;
+}
+
+.battery-medium {
+    background: #facc15;
+}
+
+.battery-low {
+    background: #ef4444;
+>>>>>>> 264faa4 (Improve drone dashboard frontend)
 }
