@@ -22,4 +22,6 @@ public class CreateMissionRequest {
 
     @NotNull
     private Double dropLng;
+
+    private Boolean forceDropFailure;
 }
