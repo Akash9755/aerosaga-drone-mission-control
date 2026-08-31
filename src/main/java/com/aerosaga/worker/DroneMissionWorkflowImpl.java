@@ -66,39 +66,33 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
                 "ACTIVE"
         );
 
-        droneActivity.takeoff();
+        droneActivity.takeoff(missionId);
 
-        if (abortRequested || returnHomeRequested) {
+        if (abortRequested) {
+            abortAndReturnHome(missionId);
+            return;
+        }
 
-            missionState = "RETURNING_HOME";
-
-            droneActivity.returnToBase();
-
-            missionStatusActivity.updateStatus(
-                    missionId,
-                    "COMPLETED"
-            );
-
-            missionState = "COMPLETED";
+        if (returnHomeRequested) {
+            returnHomeAndComplete(missionId);
             return;
         }
 
         missionState = "NAVIGATING_TO_PICKUP";
 
-        droneActivity.navigateToPickup();
+        droneActivity.navigateToPickup(missionId);
 
-        if (abortRequested || returnHomeRequested) {
+        System.out.println(
+                ">>> AFTER NAVIGATION: abortRequested = " + abortRequested
+        );
 
-            missionState = "RETURNING_HOME";
+        if (abortRequested) {
+            abortAndReturnHome(missionId);
+            return;
+        }
 
-            droneActivity.returnToBase();
-
-            missionStatusActivity.updateStatus(
-                    missionId,
-                    "COMPLETED"
-            );
-
-            missionState = "COMPLETED";
+        if (returnHomeRequested) {
+            returnHomeAndComplete(missionId);
             return;
         }
 
@@ -112,7 +106,7 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
 
             missionState = "RETURNING_HOME";
 
-            droneActivity.returnToBase();
+            droneActivity.returnToBase(missionId);
 
             missionStatusActivity.updateStatus(
                     missionId,
@@ -124,7 +118,7 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
 
         missionState = "RETURNING_HOME";
 
-        droneActivity.returnToBase();
+        droneActivity.returnToBase(missionId);
 
         missionStatusActivity.updateStatus(
                 missionId,
@@ -134,16 +128,37 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
         missionState = "COMPLETED";
     }
 
-    private void returnToHome() {
+    private void abortAndReturnHome(Long missionId) {
 
         missionState = "RETURNING_HOME";
-        droneActivity.returnToBase();
+
+        droneActivity.returnToBase(missionId);
+
+        missionStatusActivity.updateStatus(
+                missionId,
+                "ABORTED"
+        );
+
+        missionState = "ABORTED";
+    }
+
+    private void returnHomeAndComplete(Long missionId) {
+
+        missionState = "RETURNING_HOME";
+
+        droneActivity.returnToBase(missionId);
+
+        missionStatusActivity.updateStatus(
+                missionId,
+                "COMPLETED"
+        );
 
         missionState = "COMPLETED";
     }
 
     @Override
     public void abortMission() {
+        System.out.println(">>> ABORT SIGNAL RECEIVED");
         abortRequested = true;
     }
 

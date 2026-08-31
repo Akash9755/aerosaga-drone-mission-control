@@ -48,6 +48,7 @@ public class Mission {
         PENDING,
         ACTIVE,
         COMPLETED,
-        FAILED
+        FAILED,
+        ABORTED
     }
 }

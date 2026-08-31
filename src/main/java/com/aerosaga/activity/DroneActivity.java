@@ -7,11 +7,11 @@ import io.temporal.activity.ActivityMethod;
 public interface DroneActivity {
 
     @ActivityMethod
-    void takeoff();
+    void takeoff(Long missionId);
 
     @ActivityMethod
-    void navigateToPickup();
+    void navigateToPickup(Long missionId);
 
     @ActivityMethod
-    void returnToBase();
+    void returnToBase(Long missionId);
 }

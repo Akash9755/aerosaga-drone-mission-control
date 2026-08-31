@@ -16,13 +16,16 @@ public class DroneMissionWorker {
 
     private final WorkflowClient workflowClient;
     private final MissionStatusActivityImpl missionStatusActivity;
+    private final DroneActivityImpl droneActivity;
 
     public DroneMissionWorker(
             WorkflowClient workflowClient,
-            MissionStatusActivityImpl missionStatusActivity) {
+            MissionStatusActivityImpl missionStatusActivity,
+            DroneActivityImpl droneActivity) {
 
         this.workflowClient = workflowClient;
         this.missionStatusActivity = missionStatusActivity;
+        this.droneActivity = droneActivity;
     }
 
     @PostConstruct
@@ -39,7 +42,7 @@ public class DroneMissionWorker {
         );
 
         worker.registerActivitiesImplementations(
-                new DroneActivityImpl(),
+                droneActivity,
                 new DeliveryActivityImpl(),
                 missionStatusActivity
         );
