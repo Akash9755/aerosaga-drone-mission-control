@@ -2,6 +2,7 @@ package com.aerosaga.worker;
 
 import com.aerosaga.activity.DeliveryActivity;
 import com.aerosaga.activity.DroneActivity;
+import com.aerosaga.activity.MissionStatusActivity;
 import com.aerosaga.workflow.DroneMissionWorkflow;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.common.RetryOptions;
@@ -37,6 +38,19 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
                             .build()
             );
 
+    private final MissionStatusActivity missionStatusActivity =
+            Workflow.newActivityStub(
+                    MissionStatusActivity.class,
+                    ActivityOptions.newBuilder()
+                            .setStartToCloseTimeout(Duration.ofMinutes(1))
+                            .setRetryOptions(
+                                    RetryOptions.newBuilder()
+                                            .setMaximumAttempts(3)
+                                            .build()
+                            )
+                            .build()
+            );
+
     private boolean abortRequested = false;
     private boolean returnHomeRequested = false;
 
@@ -46,34 +60,81 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
     public void executeMission(Long missionId) {
 
         missionState = "TAKEOFF";
+
+        missionStatusActivity.updateStatus(
+                missionId,
+                "ACTIVE"
+        );
+
         droneActivity.takeoff();
 
         if (abortRequested || returnHomeRequested) {
+
             missionState = "RETURNING_HOME";
+
             droneActivity.returnToBase();
+
+            missionStatusActivity.updateStatus(
+                    missionId,
+                    "COMPLETED"
+            );
+
             missionState = "COMPLETED";
             return;
         }
 
         missionState = "NAVIGATING_TO_PICKUP";
+
         droneActivity.navigateToPickup();
 
         if (abortRequested || returnHomeRequested) {
+
             missionState = "RETURNING_HOME";
+
             droneActivity.returnToBase();
+
+            missionStatusActivity.updateStatus(
+                    missionId,
+                    "COMPLETED"
+            );
+
             missionState = "COMPLETED";
             return;
         }
 
         try {
+
             missionState = "DROPPING_PACKAGE";
+
             deliveryActivity.dropPackage();
+
         } catch (Exception e) {
+
             missionState = "RETURNING_HOME";
+
             droneActivity.returnToBase();
-            missionState = "FAILED";
+
+            missionStatusActivity.updateStatus(
+                    missionId,
+                    "FAILED"
+            );
+
             throw e;
         }
+
+        missionState = "RETURNING_HOME";
+
+        droneActivity.returnToBase();
+
+        missionStatusActivity.updateStatus(
+                missionId,
+                "COMPLETED"
+        );
+
+        missionState = "COMPLETED";
+    }
+
+    private void returnToHome() {
 
         missionState = "RETURNING_HOME";
         droneActivity.returnToBase();

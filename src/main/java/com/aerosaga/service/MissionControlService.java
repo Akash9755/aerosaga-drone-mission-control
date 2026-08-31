@@ -3,8 +3,6 @@ package com.aerosaga.service;
 import com.aerosaga.workflow.DroneMissionWorkflow;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
-import io.temporal.serviceclient.WorkflowServiceStubs;
-import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,16 +12,8 @@ public class MissionControlService {
 
     private final WorkflowClient workflowClient;
 
-    public MissionControlService() {
-
-        WorkflowServiceStubs service =
-                WorkflowServiceStubs.newServiceStubs(
-                        WorkflowServiceStubsOptions.newBuilder()
-                                .setTarget("localhost:7233")
-                                .build()
-                );
-
-        this.workflowClient = WorkflowClient.newInstance(service);
+    public MissionControlService(WorkflowClient workflowClient) {
+        this.workflowClient = workflowClient;
     }
 
     public void startMission(Long missionId) {
