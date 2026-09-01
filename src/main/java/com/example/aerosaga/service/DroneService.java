@@ -1,13 +1,15 @@
 package com.example.aerosaga.service;
 
 import com.example.aerosaga.entity.Drone;
+import com.example.aerosaga.exception.ResourceNotFoundException;
 import com.example.aerosaga.repository.DroneRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -19,9 +21,17 @@ public class DroneService {
         return droneRepository.findAll();
     }
 
+    // Paginated + optionally filtered by status, e.g. GET /api/drones?status=FLYING&page=0&size=10
+    public Page<Drone> getDrones(Drone.DroneStatus status, Pageable pageable) {
+        if (status != null) {
+            return droneRepository.findByStatus(status, pageable);
+        }
+        return droneRepository.findAll(pageable);
+    }
+
     public Drone getDrone(Long id) {
         return droneRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Drone not found: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Drone not found: " + id));
     }
 
     public Drone registerDrone(String model) {
