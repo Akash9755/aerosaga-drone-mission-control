@@ -7,6 +7,8 @@ import com.aerosaga.repository.DroneRepository;
 import com.aerosaga.repository.MissionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MissionService {
 
@@ -46,5 +48,9 @@ public class MissionService {
         );
 
         return missionRepository.save(savedMission);
+    }
+
+    public List<Mission> getMissionsByDrone(Long droneId) {
+        return missionRepository.findByDroneId(droneId);
     }
 }

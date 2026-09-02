@@ -81,5 +81,14 @@ public class MissionController {
                 missionControlService.getMissionState(missionId)
         );
     }
+
+    @GetMapping("/by-drone/{droneId}")
+    public ResponseEntity<List<Mission>> getMissionsByDrone(
+            @PathVariable Long droneId) {
+
+        return ResponseEntity.ok(
+                missionService.getMissionsByDrone(droneId)
+        );
+    }
 }
 
