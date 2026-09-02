@@ -47,4 +47,14 @@ public class DroneController {
         droneService.deleteDrone(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Drone> updateStatus(
+            @PathVariable Long id,
+            @RequestParam Drone.DroneStatus status) {
+
+        return ResponseEntity.ok(
+                droneService.updateStatus(id, status)
+        );
+    }
 }

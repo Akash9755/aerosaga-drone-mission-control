@@ -71,4 +71,14 @@ public class DroneService {
 
         return droneRepository.save(drone);
     }
+
+    public Drone updateStatus(Long droneId, Drone.DroneStatus status) {
+
+        Drone drone = getDrone(droneId);
+
+        drone.setStatus(status);
+        drone.setLastUpdated(LocalDateTime.now());
+
+        return droneRepository.save(drone);
+    }
 }
