@@ -31,11 +31,10 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers(
-                                "/actuator/health"
+                                "/actuator/health",
+                                "/ws/telemetry"
                         ).permitAll()
-
                         .anyRequest().authenticated()
                 )
 

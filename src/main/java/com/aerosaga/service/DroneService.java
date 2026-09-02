@@ -3,6 +3,7 @@ package com.aerosaga.service;
 import com.aerosaga.entity.Drone;
 import com.aerosaga.repository.DroneRepository;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 import java.util.List;
 
@@ -49,5 +50,25 @@ public class DroneService {
         }
 
         droneRepository.deleteById(id);
+    }
+
+    public Drone updatePosition(
+            Long droneId,
+            Double lat,
+            Double lng,
+            Double batteryLevel) {
+
+        Drone drone = getDrone(droneId);
+
+        drone.setCurrentLat(lat);
+        drone.setCurrentLng(lng);
+
+        if (batteryLevel != null) {
+            drone.setBatteryLevel(batteryLevel);
+        }
+
+        drone.setLastUpdated(LocalDateTime.now());
+
+        return droneRepository.save(drone);
     }
 }

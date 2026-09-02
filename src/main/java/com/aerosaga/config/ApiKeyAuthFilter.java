@@ -29,7 +29,9 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
         // Public endpoints
-        if (path.startsWith("/actuator/health")) {
+        if (path.startsWith("/actuator/health")
+                || path.startsWith("/ws/telemetry")) {
+
             filterChain.doFilter(request, response);
             return;
         }
