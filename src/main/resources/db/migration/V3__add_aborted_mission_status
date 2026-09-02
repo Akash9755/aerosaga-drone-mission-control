@@ -1,0 +1,10 @@
+-- The 'status' column on missions is a plain VARCHAR (see V1), so no column
+-- type change is required to support the new ABORTED value used by
+-- MissionStatus.ABORTED (Java enum, EnumType.STRING). This migration exists
+-- to version-track the change and document it for anyone reading the schema
+-- history, and to add a CHECK constraint so the column only ever holds a
+-- value the application actually understands.
+
+ALTER TABLE missions
+    ADD CONSTRAINT chk_missions_status
+    CHECK (status IN ('PENDING', 'ACTIVE', 'COMPLETED', 'FAILED', 'ABORTED'));

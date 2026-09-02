@@ -1,0 +1,29 @@
+-- Initial schema for AeroSaga: drones and missions tables.
+
+CREATE TABLE drones (
+    id              BIGSERIAL PRIMARY KEY,
+    model           VARCHAR(255) NOT NULL,
+    status          VARCHAR(20)  NOT NULL DEFAULT 'IDLE',
+    battery_level   DOUBLE PRECISION DEFAULT 100.0,
+    current_lat     DOUBLE PRECISION,
+    current_lng     DOUBLE PRECISION,
+    last_updated    TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE TABLE missions (
+    id                     BIGSERIAL PRIMARY KEY,
+    drone_id               BIGINT NOT NULL REFERENCES drones(id),
+    status                 VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    pickup_lat             DOUBLE PRECISION NOT NULL,
+    pickup_lng             DOUBLE PRECISION NOT NULL,
+    drop_lat               DOUBLE PRECISION NOT NULL,
+    drop_lng               DOUBLE PRECISION NOT NULL,
+    temporal_workflow_id   VARCHAR(255),
+    force_drop_failure     BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at             TIMESTAMP NOT NULL DEFAULT now(),
+    completed_at           TIMESTAMP
+);
+
+CREATE INDEX idx_missions_drone_id ON missions(drone_id);
+CREATE INDEX idx_missions_status ON missions(status);
+CREATE INDEX idx_drones_status ON drones(status);

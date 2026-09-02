@@ -1,0 +1,8 @@
+-- Sample drones so the fleet dashboard has something to show immediately
+-- after a fresh setup, without requiring manual API calls first.
+
+INSERT INTO drones (model, status, battery_level, current_lat, current_lng)
+VALUES
+    ('DJI Mavic 3',        'IDLE', 100.0, 22.7196, 75.8577),
+    ('Skydio X2',          'IDLE', 95.5,  22.7100, 75.8600),
+    ('Autel EVO Lite+',    'CHARGING', 40.0, 22.7050, 75.8550);
