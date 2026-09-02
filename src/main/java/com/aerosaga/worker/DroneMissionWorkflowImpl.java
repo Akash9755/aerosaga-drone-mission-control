@@ -100,7 +100,7 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
 
             missionState = "DROPPING_PACKAGE";
 
-            deliveryActivity.dropPackage();
+            deliveryActivity.dropPackage(missionId);
 
         } catch (Exception e) {
 
