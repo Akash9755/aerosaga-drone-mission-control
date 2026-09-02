@@ -7,5 +7,5 @@ import io.temporal.activity.ActivityMethod;
 public interface DeliveryActivity {
 
     @ActivityMethod
-    void dropPackage();
+    void dropPackage(Long missionId);
 }
