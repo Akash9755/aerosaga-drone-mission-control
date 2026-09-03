@@ -4,6 +4,7 @@ import com.aerosaga.entity.Drone;
 import com.aerosaga.repository.DroneRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import com.aerosaga.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -22,8 +23,7 @@ public class DroneService {
 
     public Drone getDrone(Long id) {
         return droneRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Drone not found"));
-    }
+                .orElseThrow(() -> new ResourceNotFoundException("Drone not found"));    }
 
     public Drone createDrone(Drone drone) {
         return droneRepository.save(drone);
@@ -46,8 +46,7 @@ public class DroneService {
     public void deleteDrone(Long id) {
 
         if (!droneRepository.existsById(id)) {
-            throw new RuntimeException("Drone not found");
-        }
+            throw new ResourceNotFoundException("Drone not found");        }
 
         droneRepository.deleteById(id);
     }
