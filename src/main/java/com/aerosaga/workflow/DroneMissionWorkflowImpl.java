@@ -12,11 +12,19 @@ import java.time.Duration;
  * Implementation is deterministic Java code — no direct DB/network calls
  * here, only calls to Activities (which do the real work and can be
  * retried/replayed safely by Temporal).
+ *
+ * Merged from two branches:
+ *  - Base structure, activity retry/timeout config, and the
+ *    drop-failure compensation logic are from the original implementation.
+ *  - The returnHome() signal and its handling (recall the drone
+ *    mid-mission without treating it as a failure) is merged in from
+ *    a teammate's branch.
  */
 public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
 
     private String currentStep = "PENDING";
     private boolean abortRequested = false;
+    private boolean returnHomeRequested = false;
 
     private final ActivityOptions activityOptions = ActivityOptions.newBuilder()
             .setStartToCloseTimeout(Duration.ofMinutes(5))
@@ -38,23 +46,21 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
         try {
             currentStep = "TAKEOFF";
             droneActivity.takeoff(missionId);
-            checkAbort();
+            checkInterrupts(missionId);
 
             currentStep = "NAVIGATE";
             droneActivity.navigateToPickup(missionId);
-            checkAbort();
+            checkInterrupts(missionId);
 
             currentStep = "DROP";
             try {
                 deliveryActivity.dropPackage(missionId);
             } catch (Exception dropFailure) {
-                // Compensation logic: if the drop fails, don't fail the
-                // whole mission silently — send the drone home instead.
+
                 currentStep = "RETURN_AFTER_FAILURE";
                 droneActivity.returnToBase(missionId);
                 throw dropFailure;
             }
-            checkAbort();
 
             currentStep = "RETURN";
             droneActivity.returnToBase(missionId);
@@ -63,6 +69,11 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
         } catch (AbortException e) {
             currentStep = "ABORTED";
             droneActivity.returnToBase(missionId);
+        } catch (ReturnHomeException e) {
+
+            currentStep = "RETURN";
+            droneActivity.returnToBase(missionId);
+            currentStep = "COMPLETED";
         }
     }
 
@@ -72,16 +83,33 @@ public class DroneMissionWorkflowImpl implements DroneMissionWorkflow {
     }
 
     @Override
+    public void returnHome() {
+        returnHomeRequested = true;
+    }
+
+    @Override
     public String getCurrentStep() {
         return currentStep;
     }
 
-    private void checkAbort() {
+    /**
+     * Checked at each major step boundary. Abort takes priority over a
+     * plain return-home request if both were somehow signalled — an
+     * emergency abort should never be silently downgraded to a normal
+     * recall.
+     */
+    private void checkInterrupts(Long missionId) {
         if (abortRequested) {
             throw new AbortException();
+        }
+        if (returnHomeRequested) {
+            throw new ReturnHomeException();
         }
     }
 
     private static class AbortException extends RuntimeException {
+    }
+
+    private static class ReturnHomeException extends RuntimeException {
     }
 }

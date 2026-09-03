@@ -18,13 +18,15 @@ public interface DroneMissionWorkflow {
     @WorkflowMethod
     void startMission(Long missionId);
 
-    // Lets a human interrupt a running mission from the UI
-    // (e.g. an "Emergency Abort" button)
+
     @SignalMethod
     void abortMission();
 
-    // Lets the UI poll "where is this mission right now?"
-    // without waiting for the workflow to finish
+
+    @SignalMethod
+    void returnHome();
+
+
     @QueryMethod
     String getCurrentStep();
 }
