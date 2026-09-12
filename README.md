@@ -27,6 +27,8 @@ AeroSaga uses [Temporal.io](https://temporal.io) to make each mission a
 **durable workflow**. Temporal — not application memory — tracks a mission's
 progress externally. If the backend crashes and restarts, the workflow simply
 resumes from its last completed step, with zero manual intervention.
+<img width="1600" height="764" alt="WhatsApp Image 2026-09-07 at 14 23 51" src="https://github.com/user-attachments/assets/e5d3a991-9829-4af3-8392-f5d74b867123" />
+<img width="1600" height="767" alt="WhatsApp Image 2026-09-07 at 14 23 50" src="https://github.com/user-attachments/assets/d8a55bb0-8824-462f-acfb-0492f1d03997" />
 
 ---
 
@@ -181,10 +183,6 @@ failure-simulation path.
 
 ---
 
-## Contributors
-
-- Akash Tripathi — Backend (persistence, API, security, WebSocket, workflow integration)
-- Dhara — Workflow logic contributions (return-home signal)
 
 ---
 
