@@ -1,4 +1,4 @@
-# aerosaga-drone-mission-control
+# Aerosaga-Drone Mission Control
 # AeroSaga — Autonomous Drone Mission Control
 
 AeroSaga is a drone delivery mission-control system built to demonstrate a core
