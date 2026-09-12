@@ -13,15 +13,7 @@ resumes exactly where it left off.
 
 ---
 
-## The Problem
-
-A real drone delivery can take 30–45 minutes and involves several sequential
-steps — takeoff, navigate to pickup, drop the package, return to base. Typical
-web applications are built for short request/response cycles, not long,
-interruptible processes. If a normal server crashes mid-mission, all context
-about where the drone was is lost.
-
-## The Idea
+## IDEA and DASHBOARD
 
 AeroSaga uses [Temporal.io](https://temporal.io) to make each mission a
 **durable workflow**. Temporal — not application memory — tracks a mission's
